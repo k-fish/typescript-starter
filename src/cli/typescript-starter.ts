@@ -95,8 +95,13 @@ export async function typescriptStarter(
         ? {
             ...pkg.scripts,
             preinstall: `node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('${projectName} must be installed with Yarn: https://yarnpkg.com/')\"`
+
+            reset: "git clean -dfx && git reset --hard && yarn install",
           }
-        : { ...pkg.scripts },
+        : {
+            ...pkg.scripts,
+            reset: "git clean -dfx && git reset --hard && npm i",
+          },
     version: '1.0.0'
   };
 
